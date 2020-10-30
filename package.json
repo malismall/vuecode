@@ -1,0 +1,26 @@
+{
+  "name": "vue-code",
+  "version": "1.0.0",
+  "description": "...\r npm install rollup \r ...",
+  "main": "rollup.config.js",
+  "dependencies": {
+    "cross-env": "^7.0.2",
+    "rollup": "^2.32.1",
+    "rollup-plugin-babel": "^4.4.0",
+    "rollup-plugin-serve": "^1.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malismall/vuecode.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/malismall/vuecode/issues"
+  },
+  "homepage": "https://github.com/malismall/vuecode#readme"
+}
