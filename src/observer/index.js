@@ -1,6 +1,20 @@
+import { arrayMethods } from "./array";
+
 class Observer {
   constructor(value) { // 需要对value属性重新定义
-    this.walk(value);
+    Object.defineProperty(value, '__ob__', {
+      enumerable: false,
+      configurable: false,
+      value: this
+    });
+    // value可能是对象可能是数组
+    if (Array.isArray(value)) {
+      // 重写方法更新逻辑 push shift
+      value._proto_ = arrayMethods
+      Object.setPrototypeOf(value, arrayMethods)
+    } else {
+      this.walk(value);
+    }
   }
   walk(data) {
     // 将对象中的所有key，重新定义成响应式
@@ -8,24 +22,24 @@ class Observer {
       defineReactive(data, key, data[key]);
 
     })
-    // let keys = Object.keys(data);
-    // for(let i = 0; i < keys.length; i++){
-    //     let key = keys[i];
-    //     let value = data[key];
-    //     defineReactive(data,key,value);
-    // }
+  }
+  observeArray(value) {
+    for (let i = 0; i < value.length; i++) {
+      observe(value[i]);
+    }
   }
 }
 
 export function defineReactive(data, key, value) {
-  // observe(value);
+  // 对象递归拦截
+  observe(value);
   Object.defineProperty(data, key, {
     get() {
       return value
     },
     set(newValue) {
       if (newValue == value) return;
-      // observe(newValue);
+      observe(newValue); //如果是对象递归调用
       value = newValue
     }
   })

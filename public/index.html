@@ -8,12 +8,19 @@
 </head>
 
 <body>
+  <div id="app">
+    <div>{{name}}</div>
+  </div>
   <script src="/dist/vue.js"></script>
   <script>
     // console.log(Vue)
     const vm = new Vue({ //vue2 options API
+      el: '#app',
       data() {
-        return { name: 'zf' }
+        return {
+          arr: [1, 2, 3],
+          name: 'test'
+        }
       },
       methods: {
 
@@ -24,8 +31,10 @@
       watch: {
 
       }
-    });
-    console.log(vm.name)
+    })
+    vm.arr.push('ok');
+
+    console.log(vm)
   </script>
 </body>
 
